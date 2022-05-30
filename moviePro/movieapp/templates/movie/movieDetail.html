@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %} Film Detay {% endblock %}
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'movie/css/errorlist.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'movie/partials/movieDetail.html' %}
+
+{% include 'movie/partials/comment.html' %}
+
+{% endblock %}
+
+{% block js_files %} {% endblock %}
+

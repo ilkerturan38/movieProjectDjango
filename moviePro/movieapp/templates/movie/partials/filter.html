@@ -1,0 +1,114 @@
+{% load widget_tweaks %}
+{% load static %}
+{% load custom_tags %}
+
+<style>
+    label
+    {
+        color:yellowgreen;
+    }
+</style>
+<section class="section section--first section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section__wrap">
+                    <!-- section title -->
+                    <h2 class="section__title">Arama Motoru </h2>
+                    <!-- end section title -->
+
+                    <!-- breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb__item"><a href="{% url 'index' %}">Anasayfa</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Filter</li>
+    
+                    </ul>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+
+<!-- filter -->
+<div class="filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="get" class="form">
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.genre.id_for_label }}">Film Kategorisi</label>
+                        {% render_field myFilter.form.genre class="form__input" %}
+                    </div>
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.language.id_for_label }}">Film Dili</label>
+                        {% render_field myFilter.form.language class="form__input" %}
+                    </div>
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.image_quality.id_for_label }}">Film Kalitesi</label>
+                        {% render_field myFilter.form.image_quality class="form__input" %}
+                    </div>
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.start_date.id_for_label }}">Başlangıç Tarihi</label>
+                        {% render_field myFilter.form.start_date class="form__input" placeHolder="Örn ; 01/01/2017" %}
+                    </div>
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.end_date.id_for_label }}">Bitiş Tarihi</label>
+                        {% render_field myFilter.form.end_date class="form__input" placeHolder="Örn ; 10/18/2018" %}
+                    </div>
+                    <div style="margin-top:30px">
+                        <label for="{{ myFilter.form.ordering.id_for_label }}">Sıralama</label>
+                        {% render_field myFilter.form.ordering class="form__input" %}
+                    </div>
+                    <input type="submit" class="filter__btn" value="Arama Yap">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <img src="https://www.sinema.cc/wp-content/themes/Wpdeo_Wega/__front/images/walle-robot.png" class="img-responsive" style="width:400px;" alt="">
+            </div>
+    
+        {% if sorgu %}
+        {% for item in sorgu %}
+        <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                        <img src="{{ item.image.url }}" alt="">
+                        <a href="{% url 'movieDetail' item.slug %}" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__title">
+                            <a href="{% url 'movieDetail' item.slug %}">{{ item.title }}</a>
+                        </h3>
+                        <span class="card__category">
+                            <a href="#"></a>
+                        </span>
+                        <span class="card__rate">
+                            <i class="icon ion-ios-star"></i>8.4
+                        </span>
+                        <br />
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+</div>
+<!-- end filter -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Buton Form'un dışında olursa düzgün çalışıyor
+<script> 
+    $(document).ready(function(){
+        $(".card").css("display", "none");
+        $("input").click(function(){
+            $(".card").css("display", "block");
+        });
+      });
+</script>
+-->
+

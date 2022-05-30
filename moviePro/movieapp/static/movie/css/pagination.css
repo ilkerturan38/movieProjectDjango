@@ -1,0 +1,77 @@
+.pagination-outer{ text-align: center; }
+.pagination{
+    background-color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: inline-flex;
+}
+.pagination li a.page-link{
+    color: #333;
+    background-color: transparent;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    margin: 0 10px;
+    border: none;
+    border-radius: 15px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li.active a.page-link,
+.pagination li a.page-link:hover,
+.pagination li.active a.page-link:hover{
+    color: #fff;
+    background-color: transparent;
+}
+.pagination li a.page-link:focus,
+.pagination li.active a.page-link:focus{
+    color: #fff;
+    background-color: transparent;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    background: #d1d1d1;
+    height: 80%;
+    width: 80%;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li a.page-link:before{
+    background: linear-gradient(#43cea2,#185a9d);
+    top: 100%;
+}
+.pagination li a.page-link:hover:after{ opacity: 1; }
+.pagination li a.page-link:focus:before,
+.pagination li.active a.page-link:before{
+    opacity: 1;
+    top: 50%;
+}
+.pagination li a.page-link:focus:after,
+.pagination li.active a.page-link:after{
+    opacity: 0;
+}
+@media only screen and (max-width: 480px){
+    .pagination{
+        font-size: 0;
+        display: block;
+    }
+    .pagination li{
+        display: inline-block;
+        margin: 0 0 10px;
+    }
+}

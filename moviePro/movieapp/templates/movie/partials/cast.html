@@ -1,0 +1,121 @@
+{% load static %}
+
+<div class="main-content">
+    <div class="container mt-7">
+      <!-- Table -->
+      <div class="mb-5"><br></div>
+      <div class="row">
+    {% if person.duty_type == "2" %}
+        <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
+          <div class="card2 card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="#">
+                    <img src="{{person.image.url}}" class="rounded" height=200px>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+            <!--
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+            -->
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <!--
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Friends</span>
+                    </div>
+                    -->
+                    <div>
+                      <span class="heading">{{filmsayisi}}</span>
+                      <span class="description">Oynadığı Film Sayısı</span>
+                    </div>
+                    <div>
+                      <span class="heading">{{dizisayisi}}</span>
+                      <span class="description">Oynadığı Dizi Sayısı</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  {{ person.nameSurname }}<span class="font-weight-light"> / {{person.birthday|date:"Y-m-d" }} </span>
+                </h3>
+                <div class="h5 font-weight-300">
+
+                  <i class="ni location_pin mr-2"></i>{{person.duty}} / {{person.agecalculator}} yaşında
+                </div>
+
+                <!--
+                <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                </div>
+                <div>
+                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                </div>
+                <hr class="my-4">
+                <a href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Show more</a>
+                -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+      </div>
+    </div>
+</div>
+
+
+<section class="section section--bg" data-bg="{% static 'img/section/section.jpg' %}" style="background: url(&quot;img/section/section.jpg&quot;) center center / cover no-repeat;">
+{% if person.duty_type == "2" %}
+  <div class="container">
+    <div class="row">
+      <!-- section title -->
+      <div class="col-12">
+        <h2 class="section__title">Oynadığı Filmler</h2>
+      </div>
+      <!-- end section title -->
+
+      {% for item in film %}
+      <!-- card -->
+      <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+        <div class="card">
+          <div class="card__cover">
+            <img src="{{item.image.url}}" alt="">
+            <a href="{% url 'movieDetail' item.slug %}" class="card__play">
+              <i class="icon ion-ios-play"></i>
+            </a>
+          </div>
+          <div class="card__content">
+            <h3 class="card__title"><a href="{% url 'movieDetail' item.slug %}">{{item.title}}</a></h3>
+            <span class="card__category">
+            {% for categori in item.genre.all %}
+              <a href="{% url 'category' categori.slug %}">{{categori.name}}</a>
+            {% endfor %}
+            </span>
+            <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+      {% endfor %}
+
+      <!-- section btn -->
+      <div class="col-12">
+        <a href="#" class="section__btn">Daha Fazlası..</a>
+      </div>
+      <!-- end section btn -->
+    </div>
+  </div>
+{% endif %}
+</section>

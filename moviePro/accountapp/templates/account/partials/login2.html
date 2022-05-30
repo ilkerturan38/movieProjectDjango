@@ -1,0 +1,53 @@
+{% load static %}
+
+<div class="sign section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="sign__content">
+                    <!-- authorization form -->
+
+                    <form action="{% url 'login2' %}" method="post" class="sign__form">
+                    {% csrf_token %}
+                    <ul class="errorlist"> 
+                        {% for error in form.non_field_errors %}
+                            <li>
+                                {{ error }}  <!-- Genel Hata Mesajlarını (Form seviyesinde olan) ekranda yazdıran kısım-->
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div style="margin-bottom:15px;">
+                        {{ form.username.errors }}
+                        {{ form.username }}
+                    </div>
+                    
+                    <div style="margin-bottom:15px;">
+                        {{ form.password.errors }}
+                        {{ form.password }}
+                    </div>
+                    
+                    <button class="sign__btn" type="submit">Giriş Yap</button>
+
+                    <span class="sign__text">Don't have an account? <a href="signup.html">Sign up!</a></span>
+                    <span class="sign__text"><a href="#">Forgot password?</a></span>  
+                    
+
+                    {% if messages %}
+                    {% for item in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                <p style="color:yellow">{{item}}</p>
+                            </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    </form>
+                    <!-- end authorization form -->
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>

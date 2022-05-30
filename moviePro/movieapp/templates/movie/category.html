@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %} category {% endblock %}
+
+{% block css_files %}
+
+<link rel="stylesheet" href="{% static 'movie/css/pagination.css' %}">
+
+{% endblock %}
+
+{% block content %}  
+
+{% include 'movie/partials/category.html' %}
+
+{% endblock %}
+
+{% block js_files %} {% endblock %}

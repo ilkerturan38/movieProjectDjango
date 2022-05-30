@@ -1,0 +1,25 @@
+
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block title %} Anasayfa {% endblock %}
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'movie/css/pagination.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'movie/partials/newitems.html' %}
+
+{% include 'movie/partials/upcoming_movies.html' %}
+
+{% endblock %}
+
+{% block js_files %}
+
+
+{% endblock %}

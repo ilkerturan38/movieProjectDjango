@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %} Yönetmen {% endblock %}
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'movie/css/castdirector.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'movie/partials/director.html' %}
+
+{% endblock %}
+
+{% block js_files %} {% endblock %}

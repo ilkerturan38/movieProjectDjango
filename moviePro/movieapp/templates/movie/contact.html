@@ -1,0 +1,22 @@
+{% extends 'contact.html' %}
+
+{% load static %}
+
+{% block title %} İletişim {% endblock %}
+
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'contact/css/style.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'movie/partials/contact.html' %}
+
+{% endblock %}
+
+
+{% block js_files %} {% endblock %}

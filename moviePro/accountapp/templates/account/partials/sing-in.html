@@ -1,0 +1,71 @@
+{% load static %}
+
+<div class="sign section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="sign__content">
+                    <!-- registration form -->
+                    <form action="{% url 'sing-in' %}" class="sign__form" method="post">
+                    {% csrf_token %}
+                    <ul class="errorlist"> 
+                        {% for error in form.non_field_errors %}
+                            <li>
+                                {{ error }}  <!-- Genel Hata Mesajlarını ekranda yazdıran kısım-->
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div>
+                        {{ form.first_name.errors }}
+                    </div>
+
+                    <div class="sign__group">
+                        {{ form.first_name }}
+                    </div>
+
+                    <div>
+                        {{ form.last_name.errors }}
+                    </div>
+
+                    <div class="sign__group">
+                        {{ form.last_name }}
+                    </div>
+
+                    <div>
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="sign__group">
+                        {{ form.email }}
+                    </div>
+
+                    <div>
+                        {{ form.password1.errors }}
+                        {{ form.password2.errors }}
+                    </div>
+
+                    <div class="sign__group">
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="sign__group">
+                        {{ form.password2 }}
+                    </div>
+
+
+                    <div class="sign__group sign__group--checkbox">
+                        <input id="remember" name="remember" type="checkbox" checked="checked">
+                        <label for="remember">Gizlilik politikasını <a href="#">kabul ediyorum.</a></label>
+                    </div>
+                        
+                    <button class="sign__btn" type="submit">Kayıt Ol</button>
+
+                    <span class="sign__text">Zaten hesabınız var mı? <a href="{% url 'login' %}">Giriş Yap!</a></span>
+                    </form>
+                    <!-- registration form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'profile/css/editprofile.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    
+    {% block css_files %} {% endblock %}
+
+</head>
+
+<body>
+
+    <div class="main-content">
+
+        {% include 'profile/partials/navbar.html' %}
+
+        {% block content %} {% endblock %}
+
+    </div>
+
+    {% include 'profile/partials/footer.html' %}
+
+	{% block js_files %} {% endblock %}
+
+
+
+</body>
+</html>

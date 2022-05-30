@@ -1,0 +1,194 @@
+{% load humanize %}
+<style>
+ label
+ {
+    color:ghostwhite;
+ }
+
+</style>
+
+
+<section class="content">
+    <div class="content__head">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- content title -->
+                    <h2 class="content__title">Keşfet</h2>
+                    <!-- end content title -->
+                    <!-- content tabs nav -->
+                    <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                               data-toggle="tab"
+                               href="#tab-1"
+                               role="tab"
+                               aria-controls="tab-1"
+                               aria-selected="true">Yorumlar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               data-toggle="tab"
+                               href="#tab-2"
+                               role="tab"
+                               aria-controls="tab-2"
+                               aria-selected="false">Fotoğraflar</a>
+                        </li>
+                    </ul>
+                    <!-- end content tabs nav -->
+                    <!-- content mobile tabs nav -->
+                    <div class="content__mobile-tabs" id="content__mobile-tabs">
+                        <div class="content__mobile-tabs-btn dropdown-toggle"
+                             role="navigation"
+                             id="mobile-tabs"
+                             data-toggle="dropdown"
+                             aria-haspopup="true"
+                             aria-expanded="false">
+                            <input type="button" value="Comments">
+                            <span></span>
+                        </div>
+                        <div class="content__mobile-tabs-menu dropdown-menu"
+                             aria-labelledby="mobile-tabs">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                       id="1-tab"
+                                       data-toggle="tab"
+                                       href="#tab-1"
+                                       role="tab"
+                                       aria-controls="tab-1"
+                                       aria-selected="true">Comments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       id="2-tab"
+                                       data-toggle="tab"
+                                       href="#tab-2"
+                                       role="tab"
+                                       aria-controls="tab-2"
+                                       aria-selected="false">Photos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end content mobile tabs nav -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8 col-xl-8">
+                <!-- content tabs -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                        <div class="row">
+                            <!-- comments -->
+                            {% for item in yorumlar %}
+                            <div class="col-12">
+                                <div class="comments">
+                                    <ul class="comments__list">
+                                        <li class="comments__item">
+                                            <div class="comments__autor">
+                                                <img class="comments__avatar" src="img/user.png" alt="">
+                                                <span class="comments__name">{{item.nameSurname}}</span>
+                                                <span class="comments__time">{{item.date| naturaltime}}</span>
+                                            </div>
+                                            <p class="comments__text">{{item.mesaj}}</p>
+                                            <div class="comments__actions">
+                                                <div class="comments__rate">
+                                                    <button type="button"><i class="icon ion-md-thumbs-up"></i>12</button>
+                                                    <button type="button">7<i class="icon ion-md-thumbs-down"></i></button>
+                                                </div>
+
+                                                <button type="button"><i class="icon ion-ios-share-alt"></i>Reply</button>
+                                                <button type="button"><i class="icon ion-ios-quote"></i>Quote</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            <div class="col-12">
+                                <ul class="errorlist">
+                                {% for error in form.non_field_errors %} <!-- Genel yada field ile ilişkili bütün hata mesajlarını gösterir-->
+                                    <li>
+                                        {{ error }} 
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                                <form method="post" action="{% url 'movieDetail' film.slug %}" class="form">
+                                    {% csrf_token %}
+                                    <div class="mb-5">
+                                        {{ form.nameSurname.errors }}
+                                        <label for="{{ form.nameSurname.id_for_label }}">Ad-Soyad</label>
+                                        {{ form.nameSurname }} 
+                                    </div>
+                                    <div class="mb-5">
+                                        {{ form.mesaj.errors }}
+                                        <label for="{{ form.mesaj.id_for_label }}">Mesaj</label>
+                                        {{ form.mesaj }} 
+                                    </div>
+                                    <div class="mb-5">
+                                        {{ form.email.errors }}
+                                        <label for="{{ form.email.id_for_label }}">E-mail</label>
+                                        {{ form.email }} 
+                                    </div>
+                                    <div class="mb-5">
+                                        {{ form.rating.errors }}
+                                        <label for="{{ form.rating.id_for_label }}">Puan</label>
+                                        {{ form.rating }} 
+                                    </div>
+
+                                    <button type="submit" class="form__btn">Gönder</button>
+                                </form>
+                                
+                            </div>
+                            <!-- end comments -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                        <!-- project gallery -->
+                        <div class="gallery" itemscope="" data-pswp-uid="1">
+                            <div class="row">
+                                <!-- gallery item -->
+                            {% for item in fotograflar %}
+                                <figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope="">
+                                    <a href="img/gallery/project-1.jpg" itemprop="contentUrl" data-size="1920x1280">
+                                        <img src="{{item.photo.url}}" itemprop="thumbnail" alt="Image description">
+                                    </a>
+                                    <figcaption itemprop="caption description">Some image caption 1</figcaption>
+                                </figure>
+                                <!-- end gallery item -->
+                            {% endfor %}
+                            </div>
+                        </div>
+                        <!-- end project gallery -->
+                    </div>
+                </div>
+                <!-- end content tabs -->
+            </div>
+
+            <!-- sidebar -->
+            <div class="col-12 col-lg-4 col-xl-4">
+                {% include 'movie/partials/sidebarMovies.html' %}
+            </div>
+            <!-- end sidebar -->
+        </div>      
+    </div>
+    <!-- end content tabs -->
+</div>
+<!-- sidebar -->
+
+<!-- end sidebar -->
+</div>
+</div>
+</section>
+
+<script>
+    setTimeout(function() {
+     $('.hide1').fadeOut('slow');
+     }, 6500);
+</script>

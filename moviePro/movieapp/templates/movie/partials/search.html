@@ -1,0 +1,100 @@
+{% load widget_tweaks %}
+<section class="section section--first section--bg" data-bg="img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section__wrap">
+                    <!-- section title -->
+                    <h2 class="section__title">Arama Sonuçları</h2>
+                    <!-- end section title -->
+
+                    <!-- breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb__item"><a href="{% url 'index' %}">Anasayfa</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Arama</li>
+                    </ul>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+
+<!-- filter -->
+<div class="filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filter__content">
+                    <div class="filter__items">
+                        <!-- filter item -->
+                        <div class="filter__item" id="filter__genre">
+                            <span class="filter__item-label">GENRE:</span>
+
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="button" value="Action/Adventure">
+                                <span></span>
+                            </div>
+
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
+                                <li>Deneme</li>
+                            </ul>
+                        </div>
+                        <!-- end filter item -->
+                    </div>
+                    
+                    <!-- filter btn -->
+                    <button class="filter__btn" type="button">apply filter</button>
+                    <!-- end filter btn -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end filter -->
+
+<!-- catalog -->
+<!-- catalog -->
+<div class="catalog">
+    <div class="container">
+        <div class="row">
+            <!-- card -->
+            {% if sorgu %}
+            {% for item in sorgu %}
+                <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                    <div class="card">
+                        <div class="card__cover">
+                            <img src="{{ item.image.url }}" alt="">
+                            <a href="{% url 'movieDetail' item.slug %}" class="card__play">
+                                <i class="icon ion-ios-play"></i>
+                            </a>
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__title">
+                                <a href="{% url 'movieDetail' item.slug %}">{{ item.title }}</a>
+                            </h3>
+                            <span class="card__category">
+                                <a href="#"></a>
+                            </span>
+                            <span class="card__rate">
+                                <i class="icon ion-ios-star"></i>8.4
+                            </span>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- end card -->
+        {% else %}
+        
+        <div class="col-12">
+            <div class="alert alert-info">
+                <span style="color:yellow;">Aradığınız içerik bulunamadı!</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- end catalog -->
+

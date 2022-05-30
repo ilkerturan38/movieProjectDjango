@@ -1,0 +1,33 @@
+
+    <div class="row">
+        <!-- section title -->
+        <div class="col-12">
+            <h2 class="section__title section__title--sidebar">İlginizi çekebilecek diğer filmler..</h2>
+        </div>
+        <!-- end section title -->
+
+        <!-- card -->
+        {% for item in karisik %}
+        <div class="col-sm-12 col-md-6">
+            <div class="card">
+                <div class="card__cover">
+                    <img src="{{item.image.url}}" alt="" style="width:120px">
+                    <a href="{% url 'movieDetail' item.slug %}" class="card__play">
+                        <i class="icon ion-ios-play"></i>
+                    </a>
+                </div>
+                <div class="card__content">
+                    <h3 class="card__title"><a href="{% url 'movieDetail' item.slug %}">{{item.title}}</a></h3>
+                    <span class="card__category">
+                        {% for items in item.genre.all %}
+                            <a href="{% url 'category' items.slug %}">{{items.name}}</a>
+                        {% endfor %}
+                    </span>
+                    <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- end card -->
+
+    </div>

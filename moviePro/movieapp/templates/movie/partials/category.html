@@ -1,0 +1,99 @@
+
+{% load static %}
+
+<section class="section section--first section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section__wrap">
+                    <!-- section title -->
+                    <h2 class="section__title">Kategoriler</h2>
+                    <!-- end section title -->
+
+                    <!-- breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb__item"><a href="{% url 'index' %}">Anasayfa</a></li>
+                       
+                    </ul>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+
+
+
+<!-- filter -->
+<div class="filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end filter -->
+
+<!-- catalog -->
+<div class="catalog">
+    <div class="container">
+        <div class="row">
+            <!-- card -->
+            {% for item in context %}
+               
+                <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    <div class="card__cover">
+                            <img src="{{item.image.url}}" alt="">
+                            <a href="{% url 'movieDetail' item.slug %}" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                            </a>
+                    </div>
+                    
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="{% url 'movieDetail' item.slug %}">{{item.title}}</a></h3>
+                        <span class="card__category">
+                            <a href="#"></a>
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span><br/>
+                    </div>   
+                </div>
+            </div>
+               
+            {% endfor %}
+            <!-- end card -->
+           
+            <!-- paginator -->
+            <div class="col-12">
+                <div class="demo">
+                    <nav class="pagination-outer" aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if context.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ context.previous_page_number }}">«</a></li>
+                        {% endif %} 
+                        {% for i in context.paginator.page_range %}
+                        {% if context.number == i %}
+                            <li class="page-item"><span class="page-link"></span></li>
+                            <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if context.has_next %}
+                                    <li class="page-item"><a class="page-link" href="?page={{ context.next_page_number }}">»</a></li>
+                        {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- end paginator -->
+        </div>
+    </div>
+</div>
+<!-- end catalog -->
+
+
+

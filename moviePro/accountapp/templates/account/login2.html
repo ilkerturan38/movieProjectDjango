@@ -1,0 +1,18 @@
+{% extends 'session.html' %}
+{% load static %}
+
+{% block title %} Giriş Yap {% endblock %}
+
+{% block css_files %} 
+
+<link rel="stylesheet" href="{% static 'movie/css/errorlist.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'account/partials/login2.html' %}
+
+{% endblock %}
+
+{% block js_files %} {% endblock %}

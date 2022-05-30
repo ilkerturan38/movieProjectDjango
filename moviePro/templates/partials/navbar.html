@@ -1,0 +1,102 @@
+{% load static %}
+{% load custom_tags %}
+	<!-- header -->
+	<header class="header">
+		<div class="header__wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__content">
+							<!-- header logo -->
+							<a href="{% url 'index' %}" class="header__logo">
+								<img src="{% static 'img/logo.svg' %}" alt="">
+							</a>
+							<!-- end header logo -->
+
+							<!-- header nav -->
+							<ul class="header__nav">
+								<!-- dropdown -->
+								<li class="header__nav-item">
+									<a href="{% url 'index' %}" class="header__nav-link">Anasayfa</a>							
+								</li>
+							
+								<li class="header__nav-item">
+									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
+
+									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
+										{% categoryList as sorgu %}
+										{% for item in sorgu %}
+											<li><a href="{% url 'category' item.slug %}">{{item.name}}</a></li>
+										{% endfor %}
+									</ul>
+								</li>
+								
+								<li class="header__nav-item">
+									<a href="{% url 'pricingPlan' %}" class="header__nav-link">Fiyatlandırma Planı</a>
+								</li>
+
+								<li class="header__nav-item">
+									<a href="{% url 'about' %}" class="header__nav-link">Hakkımızda</a>
+								</li>
+								
+
+								<li class="header__nav-item">
+									<a href="{% url 'contact' %}" class="header__nav-link">İLETİŞİM</a>
+								</li>
+
+								
+
+								
+								<li class="dropdown header__nav-item">
+									<a class="dropdown-toggle header__nav-link header__nav-link--more" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-more"></i></a>
+
+									
+									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuMore">	
+										{% if request.user.is_authenticated %}
+											<li><a href="{% url 'profile2' %}">Profilim</a></li>
+											<li><a href="{% url 'change-password' %}">Parolamı Değiştir</a></li>
+											<li><a href="{% url 'logout' %}">Çıkış Yap</a></li>
+										{% else %}
+											<li><a href="{% url 'login' %}">Giriş Yap</a></li>
+											<li><a href="{% url 'sing-in' %}">Kayıt Ol</a></li>
+										{% endif %}
+									</ul>
+
+								</li>
+
+								<li>
+									<button class="header__search-btn" type="button">
+										<i class="icon ion-ios-search"></i>
+									</button>	
+								</li>
+							</ul>
+
+
+							<button class="header__btn" type="button">
+								<span></span>
+								<span></span>
+								<span></span>
+							</button>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- header search -->
+		<form method="get" action="{% url 'search' %}" class="header__search">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__search-content">
+							<input type="text" name="value" placeholder="Search for a movie, TV Series that you are looking for">
+							<button type="submit">search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- end header search -->
+	</header>
+	<!-- end header -->
